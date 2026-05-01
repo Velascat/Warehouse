@@ -1,0 +1,106 @@
+# ---------------------------------------------------------------------------
+# DRAFT TEMPLATE — how to define a kit for the Warehouse provisioner
+# ---------------------------------------------------------------------------
+# One file = one truth. The provisioner reads *only* this YAML when
+# generating a Kit. Every knob is here so you can see the schema clearly.
+#
+# Save drafts under: tools/warehouse/provision/draft/*.draft.yaml
+# Example:   script_segmentation.draft.yaml
+# ---------------------------------------------------------------------------
+
+kit:
+  # Human-friendly name for the kit.
+  # Default: the filename without extension (e.g., script_segmentation)
+  name: "example_kit"
+
+# ---------------------------------------------------------------------------
+# Selection rules — control which files get considered in the first place.
+# This is the coarse-grained filter applied before any static analysis.
+# ---------------------------------------------------------------------------
+selection:
+  git: true                 # If true, only include git-tracked files
+  untracked: false           # If true, also include untracked but clean files
+  ext: []                    # Restrict by extension (e.g., [py, sh, md]).
+                             # [] = no restriction, everything allowed.
+  include:
+    # Glob patterns of files/dirs to *include* in the candidate set.
+    - "src/**"
+    - "tools/**"
+    - "README.md"
+  exclude:
+    # Glob patterns to explicitly exclude.
+    - "**/__pycache__/**"
+    - "**/*.pyc"
+    - "**/.pytest_cache/**"
+    - "tests/**"
+    - "scripts/**"
+  hidden: false              # If false, dotfiles like .gitignore are skipped
+  follow_symlinks: false     # If true, symlinks are followed (dir strategy only)
+  keep_sentinels: none       # none|warehouse|segmentation_audit|kibana|all
+  # Hard overrides (apply in both 'dir' and 'analysis' modes):
+  force_include:             # Globs to always include (punch through excludes)
+    - "src/config/logging.py"
+    - "src/integrations/openai/chatgpt.py"
+  force_exclude:             # Globs to always exclude (wins over all includes)
+    - "src/analytics/**"
+
+# ---------------------------------------------------------------------------
+# Precedence order (dir + analysis):
+#   0) hidden check
+#   1) selection.keep_sentinels (optional) -> include
+#   2) selection.force_exclude                -> exclude
+#   3) selection.force_include                -> include
+#   4) selection.exclude                      -> exclude
+#   5) selection.include                      -> include
+#   6) default                                -> exclude
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Analysis rules — if you’re doing static graph analysis, configure it here.
+# If mode=dir, these settings are mostly ignored.
+# ---------------------------------------------------------------------------
+analysis:
+  mode: "analysis"           # "analysis" = use static import graph
+                             # "dir"      = raw directory-glob only
+  entry_file: "src/workflow/long_form/stages/pre_production/script_writing.py"
+                             # Entry module that seeds the dependency graph
+  class: "ScriptWritingStage"
+  method: "run"              # If null, treat the whole module as entry root
+  import_scope: "used"       # "used" = follow only actually-used imports
+                             # "all" = follow every import in reachable files
+                             # "entry-all" = include all imports in the entry file
+  star_import_policy: "warn" # How to handle `from x import *`:
+                             # "include" = pull everything
+                             # "warn"    = include but warn
+                             # "skip"    = ignore star imports
+  max_graph_depth: 0         # 0 = unlimited depth (follow until leafs)
+  # Note: force_* now live under selection; analysis.force_* remains supported
+  # for backward-compat but is deprecated.
+
+# ---------------------------------------------------------------------------
+# How to combine results from selection + analysis.
+# ---------------------------------------------------------------------------
+combine: "union"             # "dir"       = take dir-filter only
+                             # "graph"     = take analysis graph only
+                             # "union"     = include all from both
+                             # "intersect" = only files present in both
+
+# ---------------------------------------------------------------------------
+# Behavior / runtime options — knobs for debugging and strictness.
+# ---------------------------------------------------------------------------
+behavior:
+  strict_parse: false        # If true, fail on any draft parse error
+  analysis_timeout_s: 0      # Timeout for static analysis (0 = none)
+  plan: true                 # Print a summary plan of what’s included/excluded
+  verbose: 1                 # 0 = minimal logs
+                             # 1 = normal (summary info)
+                             # 2 = debug (why each file was included/excluded)
+
+# ---------------------------------------------------------------------------
+# NOTES:
+# - Use "dir" mode when you just need everything in a directory.
+# - Use "analysis" mode when you want to start from a stage/class/method and
+#   include only code that is actually imported/used.
+# - combine=intersect is great for keeping kits *tight* (only reachable files).
+# - combine=union is safer if you’re debugging missing dependencies.
+# ---------------------------------------------------------------------------

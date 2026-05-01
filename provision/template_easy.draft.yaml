@@ -1,0 +1,33 @@
+# Minimal "hello world" draft — simplest possible kit definition.
+
+kit:
+  name: "hello_world"
+
+selection:
+  git: true
+  untracked: false
+  ext: []
+  include:
+    - "src/**"
+  exclude: []
+  hidden: false
+  follow_symlinks: false
+  force_include: []
+  force_exclude: []
+
+analysis:
+  mode: "dir"         # no static analysis, just dir-globs
+  entry_file: null
+  class: null
+  method: null
+  import_scope: "used"
+  star_import_policy: "warn"
+  max_graph_depth: 0
+
+combine: "dir"
+
+behavior:
+  strict_parse: true
+  analysis_timeout_s: 0
+  plan: true
+  verbose: 1
