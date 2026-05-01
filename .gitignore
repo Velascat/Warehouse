@@ -5,3 +5,12 @@ __pycache__/
 .pytest_cache/
 dist/
 build/
+
+# OperatorConsole session state
+.console/
+
+# Custodian plugin directory (generated/managed — not source in this repo)
+_custodian/
+
+# Warehouse per-repo yard (generated artifacts)
+.warehouse/yard/
