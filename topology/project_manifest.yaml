@@ -16,7 +16,7 @@ manifest_version: "1.0.0"
 
 platform_manifest:
   name: PlatformManifest
-  version_constraint: ">=0.3,<1.0"
+  version_constraint: ">=0.3,<2.0"
 
 repos:
 
