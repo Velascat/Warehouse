@@ -1,0 +1,25 @@
+repo_key: Warehouse
+src_root: provision
+tests_root: tests
+
+audit:
+  cross_repo:
+    platform_manifest_repo: ../PlatformManifest
+
+  exclude_paths:
+    # Warehouse is a script-provisioning repo, not a package with unit-testable
+    # logic. Integration is validated by running the provision scripts end-to-end.
+    T1:
+      - "provision/**"
+    T6:
+      - "provision/**"
+    T7:
+      - "provision/**"
+    C29:
+      # provision_kit_from_draft.py orchestrates the full kit generation pipeline;
+      # the many stages and helpers make it large by design.
+      - provision/provision_kit_from_draft.py
+
+tools:
+  ruff: true
+  vulture: true
