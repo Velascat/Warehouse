@@ -1,0 +1,37 @@
+name: Validate project manifest
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "topology/project_manifest.yaml"
+      - "topology/local_manifest.example.yaml"
+      - ".github/workflows/manifest-validate.yml"
+  pull_request:
+    branches: ["**"]
+    paths:
+      - "topology/project_manifest.yaml"
+      - "topology/local_manifest.example.yaml"
+      - ".github/workflows/manifest-validate.yml"
+
+jobs:
+  validate:
+    name: platform-manifest validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install platform-manifest
+        run: pip install "platform-manifest @ git+https://github.com/Velascat/PlatformManifest.git@v0.4.0"
+      - name: Validate project manifest (in composition with bundled platform base)
+        run: |
+          platform-manifest validate \
+            topology/project_manifest.yaml \
+            --expected project
+      - name: Validate local manifest example
+        run: |
+          platform-manifest validate \
+            topology/local_manifest.example.yaml \
+            --expected local
