@@ -14,3 +14,6 @@ _custodian/
 
 # Warehouse per-repo yard (generated artifacts)
 .warehouse/yard/
+
+# Topology — per-machine local manifest (committed: example only)
+topology/local_manifest.yaml

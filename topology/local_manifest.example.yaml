@@ -1,0 +1,23 @@
+# Warehouse — Local Manifest (example)
+#
+# Copy this file to `topology/local_manifest.yaml` and fill in the
+# values for THIS machine. The live file is gitignored.
+#
+# A LocalManifest may ONLY annotate existing nodes with the 7-field
+# allowlist enforced by PlatformManifest's loader:
+#
+#   local_path / local_port / env_file / endpoint_override /
+#   cache_path / gpu_required / runtime_hints
+#
+# Anything else is a configuration error.
+
+manifest_kind: local
+manifest_version: "1.0.0"
+
+repos:
+
+  warehouse:
+    local_path: /home/dev/Documents/GitHub/Warehouse
+    # Where Warehouse keeps its yard/ on this machine. Useful when
+    # the operator has multiple checkouts or stages elsewhere.
+    # cache_path: /home/dev/.warehouse/yard
