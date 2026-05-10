@@ -1,6 +1,6 @@
 # Warehouse — Project Manifest
 #
-# Per the PlatformManifest 3-layer design (Velascat/PlatformManifest):
+# Per the PlatformManifest 3-layer design (ProtocolWarden/PlatformManifest):
 #   PlatformManifest (public, reusable)
 #     + ProjectManifest (this file — Warehouse)
 #     + LocalManifest   (per-machine; topology/local_manifest.yaml, gitignored)
@@ -23,7 +23,7 @@ repos:
   warehouse:
     canonical_name: Warehouse
     visibility: private
-    github_url: https://github.com/Velascat/Warehouse
+    github_url: https://github.com/ProtocolWarden/Warehouse
     runtime_role: managed_repo
 
 edges:

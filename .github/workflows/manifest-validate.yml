@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install platform-manifest
-        run: pip install "platform-manifest @ git+https://github.com/Velascat/PlatformManifest.git@v0.4.0"
+        run: pip install "platform-manifest @ git+https://github.com/ProtocolWarden/PlatformManifest.git@v0.4.0"
       - name: Validate project manifest (in composition with bundled platform base)
         run: |
           platform-manifest validate \
