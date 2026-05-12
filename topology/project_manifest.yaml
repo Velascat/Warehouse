@@ -7,9 +7,9 @@
 #     = EffectiveRepoGraph  (consumed by OperationsCenter)
 #
 # Warehouse is a staging ground for preparing code context for LLMs
-# (kits/crates/pallets/yards). It is consumed by VideoFoundry (and
-# potentially other private projects). Like VideoFoundry, Warehouse is
-# private — it does not belong in the public PlatformManifest.
+# (kits/crates/pallets/yards). It may be consumed by managed private
+# projects. Warehouse itself should not be treated as part of the public
+# platform graph.
 
 manifest_kind: project
 manifest_version: "1.0.0"
@@ -30,5 +30,5 @@ edges:
 
   # OperationsCenter dispatches audit and maintenance runs against
   # Warehouse as a managed repo (Custodian sweeps, ghost/flow audits,
-  # coverage analysis). Same pattern as VideoFoundry.
+  # coverage analysis). Same pattern as other managed private projects.
   - {from: OperationsCenter, to: Warehouse, type: dispatches_to}

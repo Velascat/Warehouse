@@ -23,3 +23,9 @@ audit:
 tools:
   ruff: true
   vulture: true
+
+# ---------------------------------------------------------------------------
+# Privacy / boundary enforcement (Custodian B-class)
+# ---------------------------------------------------------------------------
+privacy:
+  require_private_repo_name_source: true

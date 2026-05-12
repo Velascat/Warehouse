@@ -1,6 +1,10 @@
 # Warehouse
 
-The **warehouse** is the staging ground for preparing code context for LLMs.
+The **warehouse** is a context packaging utility for preparing code context
+for LLMs and debugging workflows.
+
+It is not part of the platform spine. It does not own topology truth,
+orchestration, governance, or scheduling.
 
 ## Structure
 
