@@ -3,6 +3,11 @@
 _Chronological continuity log. Decisions, stop points, what changed and why._
 _Not a task tracker — that's backlog.md. Keep entries concise and dated._
 
+- 2026-05-12 — RepoGraph boundary artifact wiring tightened to file-only: the
+  custodian audit path now materializes `REPOGRAPH_BOUNDARY_ARTIFACT_FILE` from a
+  source locator before invoking Custodian, and the remaining deployment-facing
+  templates were aligned to `PlatformDeployment` naming.
+
 ## Recent Decisions
 
 _Log significant choices here so they survive context resets._

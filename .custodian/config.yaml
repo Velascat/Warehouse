@@ -28,4 +28,4 @@ tools:
 # Privacy / boundary enforcement (Custodian B-class)
 # ---------------------------------------------------------------------------
 privacy:
-  require_private_repo_name_source: true
+  require_boundary_artifact: true
