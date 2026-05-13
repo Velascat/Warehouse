@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# Copyright (C) 2024 Dave Velasco. All rights reserved.
-# Proprietary and confidential. Unauthorized use prohibited.
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 ProtocolWarden
 """Generate analysis shims for code analyzer entrypoints.
 
 Resolve module paths from the repo root. Keep the leading

@@ -1,5 +1,5 @@
-# Copyright (C) 2024 Dave Velasco. All rights reserved.
-# Proprietary and confidential. Unauthorized use prohibited.
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (C) 2026 ProtocolWarden
 from __future__ import annotations
 
 """Tests for resolving relative imports in used-scope analysis."""
