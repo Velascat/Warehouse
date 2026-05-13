@@ -1,6 +1,5 @@
 # Copyright (C) 2024 Dave Velasco. All rights reserved.
 # Proprietary and confidential. Unauthorized use prohibited.
-test_overrides.py
 
 """Tests for sentinel and force override behavior."""
 

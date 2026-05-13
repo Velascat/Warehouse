@@ -1,6 +1,5 @@
 # Copyright (C) 2024 Dave Velasco. All rights reserved.
 # Proprietary and confidential. Unauthorized use prohibited.
-test_relative_imports.py
 from __future__ import annotations
 
 """Tests for resolving relative imports in used-scope analysis."""
