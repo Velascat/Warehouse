@@ -7,10 +7,18 @@ dist/
 build/
 
 # OperatorConsole session state
-.console/
+.console/*
+!.console/task.md
+!.console/guidelines.md
+!.console/backlog.md
+!.console/log.md
+CLAUDE.md
 
 # Custodian plugin directory (generated/managed — not source in this repo)
 _custodian/
+
+# Custodian temp configs (written during audit runs, not source)
+.custodian/tmp*.yaml
 
 # Warehouse per-repo yard (generated artifacts)
 .warehouse/yard/
