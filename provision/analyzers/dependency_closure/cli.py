@@ -36,7 +36,7 @@ def main() -> int:
             max_depth=args.max_depth,
         ),
     )
-    print(json.dumps({"entry": args.entry, "paths": paths}))
+    print(json.dumps({"entry": args.entry, "paths": paths}, ensure_ascii=False))
     return 0
 
 

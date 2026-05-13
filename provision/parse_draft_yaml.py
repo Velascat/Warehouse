@@ -109,7 +109,7 @@ def main() -> int:
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
 
     if parsed.emit == "json":
-        print(json.dumps(data, indent=2))
+        print(json.dumps(data, indent=2, ensure_ascii=False))
     else:
         cli = to_cli(data)
 

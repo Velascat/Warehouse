@@ -38,6 +38,7 @@ def _repo_root() -> Path:
         root = subprocess.check_output(
             ["git", "rev-parse", "--show-toplevel"],
             text=True,
+            timeout=10,
         ).strip()
         return Path(root)
     except Exception:

@@ -32,3 +32,10 @@ _Free-form scratch. Clear periodically — old entries can be deleted once no lo
 
 - Updated repo-owned references from the previous GitHub username to `ProtocolWarden` after the account rename.
 - Scope: license headers, GitHub URLs, workflow install commands, manifests, dependency URLs, examples, and local owner defaults where present.
+
+## 2026-05-13 — Custodian audit cleanup (phase 1)
+
+- C11: added timeout=10 to subprocess.check_output in provision_kit_from_draft.py; timeout=30 in dir_filter.py.
+- C41: added ensure_ascii=False to json.dumps in parse_draft_yaml.py and dependency_closure/cli.py.
+- RUFF: fixed E402 in dependency_closure/core.py (moved docstring before __future__ import).
+- S4: added tests/conftest.py with venv guard.

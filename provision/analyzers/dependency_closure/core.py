@@ -1,11 +1,9 @@
 # Copyright (C) 2024 Dave Velasco. All rights reserved.
 # Proprietary and confidential. Unauthorized use prohibited.
 # /tools/warehouse/provision/analyzers/dependency_closure/core.py
-from __future__ import annotations
-
-# /tools/warehouse/provision/analyzers/dependency_closure/core.py
-
 """Dependency graph traversal for warehouse provisioning."""
+
+from __future__ import annotations
 
 import ast
 from collections.abc import Iterable

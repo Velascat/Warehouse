@@ -36,6 +36,7 @@ def _git_ls(
         out = subprocess.check_output(
             args,
             text=True,
+            timeout=30,
         )
         return [p for p in out.splitlines() if p]
     except Exception:
