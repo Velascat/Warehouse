@@ -15,6 +15,13 @@ audit:
       - "provision/**"
     T7:
       - "provision/**"
+    T8:
+      # These tests import from provision.* (the package), not from sub-packages
+      # by name. T8 expects unqualified sub-package imports; Warehouse uses the
+      # top-level provision namespace instead.
+      - tests/test_overrides.py
+      - tests/test_parse_draft_yaml.py
+      - tests/test_relative_imports.py
     C29:
       # provision_kit_from_draft.py orchestrates the full kit generation pipeline;
       # the many stages and helpers make it large by design.

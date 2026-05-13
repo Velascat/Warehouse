@@ -3,34 +3,51 @@
 The **warehouse** is a context packaging utility for preparing code context
 for LLMs and debugging workflows.
 
-It is not part of the platform spine. It does not own topology truth,
-orchestration, governance, or scheduling.
+## What Warehouse Is
 
-## Structure
+- a context provisioning and packaging tool
+- a kit-based file selection and bundling system
+- a staging ground for LLM-ready context crates
+- a utility for preparing code subsets for assistant workflows
 
+## What Warehouse Is Not
+
+- part of the platform spine
+- an owner of topology truth
+- an orchestration or governance layer
+- a scheduling or execution system
+
+## Getting Started
+
+```bash
+# Provision a kit from a draft YAML spec
+python -m provision.provision_kit_from_draft --draft yard/drafts/my_draft.yaml
+
+# Pack a kit into a crate
+scripts/pack_kits_into_crate.sh \
+  --kit yard/kits/my_kit.txt \
+  --output yard/crates/my_crate.txt
 ```
 
-tools/warehouse/
+## Architecture Overview
+
+```
 provision/      # drafts → kits (plans, file lists)
 yard/           # active warehouse floor
-kits/         # file lists (curated subsets of code/docs)
-crates/       # bundled outputs (LLM-ready context files)
-pallets/      # symlink workspaces (materialized kits for editing)
-
+  kits/         # file lists (curated subsets of code/docs)
+  crates/       # bundled outputs (LLM-ready context files)
+  pallets/      # symlink workspaces (materialized kits for editing)
 ```
 
-## Metaphor
+The flow: **draft YAML → provision → kit → pack → crate → LLM**.
 
-- **Provision**: draw up the plans (turn drafts into kits).  
-- **Kits**: organized lists of files.  
-- **Crates**: sealed bundles built from kits, shipped to LLMs.  
-- **Pallets**: temporary workspaces made from kits, ready to load into an editor.  
+- **Provision**: turn draft specs into kit file lists.
+- **Kits**: curated lists of files scoped to a purpose.
+- **Crates**: sealed bundles built from kits, shipped to LLMs.
+- **Pallets**: temporary workspaces materialized from kits for editing.
 - **Yard**: the floor space where all active materials are staged.
 
-The warehouse is where we **provision, assemble, and stage** everything before it’s handed off.
-
-
-## Crate building
+## Crate Building
 
 Use `scripts/pack_kits_into_crate.sh` to turn a kit list into one or more crate files.
 Flags:
@@ -43,7 +60,7 @@ When splitting occurs, outputs are placed in a subdirectory named after the
 requested crate; single-part crates remain at the specified output path without
 any `.part1` suffix.
 
-Example with rotation and explicit part list:
+Example:
 
 ```bash
 tools/warehouse/scripts/pack_kits_into_crate.sh \
