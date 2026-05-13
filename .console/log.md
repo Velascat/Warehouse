@@ -45,3 +45,7 @@ _Free-form scratch. Clear periodically — old entries can be deleted once no lo
 - Removed accidental bare filename statements on line 3 of test_overrides.py, test_parse_draft_yaml.py, and test_relative_imports.py that caused NameError/SyntaxError at pytest collection time.
 - Fixed `_apply_overrides_and_sentinels` glob patterns: in Python 3.12, `Path.glob("a/**")` only matches directories. Added `_glob_files` helper that also tries `pat + "/*"` when pattern ends with `/**`, restoring Python 3.11 semantics for force_exclude and force_include. Fixed test: test_force_exclude_wins.
 - All 7 tests pass.
+
+## 2026-05-13 — Replace proprietary DV headers with AGPL-3.0-or-later
+
+All 13 Python source and test files had "Copyright (C) 2024 Dave Velasco. All rights reserved. / Proprietary and confidential." — these are private VideoFoundry headers that should not be in a ProtocolWarden public repo. Replaced with the platform standard: SPDX-License-Identifier: AGPL-3.0-or-later / Copyright (C) 2026 ProtocolWarden.
