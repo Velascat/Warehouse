@@ -49,3 +49,8 @@ _Free-form scratch. Clear periodically — old entries can be deleted once no lo
 ## 2026-05-13 — Replace proprietary DV headers with AGPL-3.0-or-later
 
 All 13 Python source and test files had "Copyright (C) 2024 Dave Velasco. All rights reserved. / Proprietary and confidential." — these are private VideoFoundry headers that should not be in a ProtocolWarden public repo. Replaced with the platform standard: SPDX-License-Identifier: AGPL-3.0-or-later / Copyright (C) 2026 ProtocolWarden.
+
+## 2026-05-13 — Fix .gitignore console policy
+
+- Changed .console/ (blanket) to .console/* with !.console/{task,guidelines,backlog,log}.md exceptions
+- Added CLAUDE.md and .custodian/tmp*.yaml to .gitignore
