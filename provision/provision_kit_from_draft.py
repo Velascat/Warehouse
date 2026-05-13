@@ -121,23 +121,31 @@ def _apply_overrides_and_sentinels(
     fi = to_list(force_include_csv)
     fe = to_list(force_exclude_csv)
 
+    def _glob_files(pat: str):
+        # In Python 3.12+, trailing `/**` matches only directories; `/**/*` catches files.
+        for p in repo_root.glob(pat):
+            if p.is_file():
+                yield p
+        if pat.endswith("/**"):
+            for p in repo_root.glob(pat + "/*"):
+                if p.is_file():
+                    yield p
+
     # 2) force_exclude (remove matches)
     if fe:
         to_remove: set[str] = set()
         for pat in fe:
-            for p in repo_root.glob(pat):
-                if p.is_file():
-                    rp = rel(str(p))
-                    if rp in as_set:
-                        to_remove.add(rp)
+            for p in _glob_files(pat):
+                rp = rel(str(p))
+                if rp in as_set:
+                    to_remove.add(rp)
         as_set.difference_update(to_remove)
 
     # 3) force_include (add matches)
     if fi:
         for pat in fi:
-            for p in repo_root.glob(pat):
-                if p.is_file():
-                    as_set.add(rel(str(p)))
+            for p in _glob_files(pat):
+                as_set.add(rel(str(p)))
 
     return sorted(as_set)
 

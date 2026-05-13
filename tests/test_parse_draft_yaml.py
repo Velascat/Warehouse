@@ -1,6 +1,5 @@
 # Copyright (C) 2024 Dave Velasco. All rights reserved.
 # Proprietary and confidential. Unauthorized use prohibited.
-test_parse_draft_yaml.py
 from pathlib import Path
 
 from provision.parse_draft_yaml import (

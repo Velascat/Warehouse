@@ -39,3 +39,9 @@ _Free-form scratch. Clear periodically — old entries can be deleted once no lo
 - C41: added ensure_ascii=False to json.dumps in parse_draft_yaml.py and dependency_closure/cli.py.
 - RUFF: fixed E402 in dependency_closure/core.py (moved docstring before __future__ import).
 - S4: added tests/conftest.py with venv guard.
+
+## 2026-05-13 — Fix test collection errors and Python 3.12 glob regression
+
+- Removed accidental bare filename statements on line 3 of test_overrides.py, test_parse_draft_yaml.py, and test_relative_imports.py that caused NameError/SyntaxError at pytest collection time.
+- Fixed `_apply_overrides_and_sentinels` glob patterns: in Python 3.12, `Path.glob("a/**")` only matches directories. Added `_glob_files` helper that also tries `pat + "/*"` when pattern ends with `/**`, restoring Python 3.11 semantics for force_exclude and force_include. Fixed test: test_force_exclude_wins.
+- All 7 tests pass.
