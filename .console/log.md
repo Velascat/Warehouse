@@ -54,3 +54,7 @@ All 13 Python source and test files had "Copyright (C) 2024 Dave Velasco. All ri
 
 - Changed .console/ (blanket) to .console/* with !.console/{task,guidelines,backlog,log}.md exceptions
 - Added CLAUDE.md and .custodian/tmp*.yaml to .gitignore
+
+## 2026-05-13 — Track .console source files
+
+- Fixed gitignore now exposes task.md, guidelines.md, backlog.md as trackable
